@@ -8,33 +8,43 @@ const eventHub = document.querySelector('.container')
 eventHub.addEventListener('officerSelected', event => {
   const criminalData = useCriminals()
 
-  if ("officer" in event.detail) {
-    const matchingCriminals = criminalData.filter(criminal => criminal.arrestingOfficer === event.detail.officer)
+  if (event.detail.officer === 'allOfficers') {
     contentElement.innerHTML = ""
+    render(criminalData)
+  } else {
+
+
+    const matchingCriminals = criminalData.filter(
+      criminal => criminal.arrestingOfficer === event.detail.officer
+    )
+    contentElement.innerHTML = ''
     render(matchingCriminals)
   }
+
 })
 
 
 eventHub.addEventListener('crimeSelected', event => {
   const criminalData = useCriminals()
-  
-  if ("crime" in event.detail) {
-    const matchingCriminals = criminalData.filter(
-      criminal => criminal.conviction === event.detail.crime
-    )
-    contentElement.innerHTML = ""
-    render(matchingCriminals)
+
+  if (event.detail.crime === 'allCrimes') {
+    contentElement.innerHTML = ''
+    render(criminalData)
+  } else {
+      const matchingCriminals = criminalData.filter(
+        criminal => criminal.conviction === event.detail.crime
+      )
+      contentElement.innerHTML = ''
+      render(matchingCriminals)
+    }
   }
-})
+)
 
 
 export const RenderCriminalsList = () => {
   const criminalData = useCriminals()
   render(criminalData)
-
 }
-
 
 const render = criminalCollection => {
   criminalCollection.forEach(
