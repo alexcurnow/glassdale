@@ -5,10 +5,21 @@ const contentElement = document.querySelector('.criminalsContainer')
 const eventHub = document.querySelector('.container')
 
 
+eventHub.addEventListener('officerSelected', event => {
+  const criminalData = useCriminals()
+
+  if ("officer" in event.detail) {
+    const matchingCriminals = criminalData.filter(criminal => criminal.arrestingOfficer === event.detail.officer)
+    contentElement.innerHTML = ""
+    render(matchingCriminals)
+  }
+})
+
+
 eventHub.addEventListener('crimeSelected', event => {
   const criminalData = useCriminals()
   
-  if (event.detail.crime) {
+  if ("crime" in event.detail) {
     const matchingCriminals = criminalData.filter(
       criminal => criminal.conviction === event.detail.crime
     )

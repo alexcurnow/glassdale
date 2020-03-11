@@ -9,10 +9,13 @@ export const ConvictionSelect = () => {
 
   const render = convictionsCollection => {
     const option = convictionsCollection.map(crime => {
-      return `<option class="crime" id="${crime.id}" value="${crime.name}">${crime.name}</option>`
+      return `
+      <option class="crime" id="${crime.id}" value="${crime.name}">${crime.name}</option>
+      `
     })
 
     contentTarget.innerHTML = `
+    <h3>Filter by Crime: </h3>
       <select class="dropdown" id="crimeSelect">
       <option value="0">Please select a crime...</option>
       ${option}
