@@ -11,7 +11,7 @@ export const OfficerSelect = () => {
     contentTarget.innerHTML = `
       <h3>Filter by Officer: </h3>
       <select class="dropdown" id="officerSelect">
-      <option value="0">Please select an officer</option>
+      <option value="0">Please select an officer...</option>
       <option value="allOfficers">Show All Criminals</option>
       ${
         officersDataArray.map(officer => {
