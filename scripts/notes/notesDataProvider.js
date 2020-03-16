@@ -26,3 +26,11 @@ export const saveNote = newNoteObject => {
     .then(getNotes)
     .then(dispatchStateChangeEvent)
 }
+
+export const deleteNote = noteIdNumber => {
+  return fetch(`http://localhost:8088/notes/${noteIdNumber}`, {
+    method: "DELETE"
+  })
+}
+
+export const useNotes = () => notes
