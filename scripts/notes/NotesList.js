@@ -3,13 +3,15 @@ import { useNotes, deleteNote } from "./notesDataProvider.js";
 
 const targetElement = document.querySelector('.noteListContainer')
 const eventHub = document.querySelector('.container')
+targetElement.classList.add('invisible')
+let invisibility = true
 
 eventHub.addEventListener('noteStateChanged', () => {
   const notes = useNotes()
+  targetElement.innerHTML = ""
   render(notes)
 })
 
-let invisibility = true
 
 eventHub.addEventListener('toggleNotesListButtonWasClicked', () => {
   invisibility = !invisibility
@@ -28,15 +30,13 @@ export const NotesList = () => {
 }
 
 const render = notesCollection => {
-  targetElement.classList.add('invisible')
-  notesCollection.forEach(note => targetElement.innerHTML += Note(note));
+  notesCollection.map(note => targetElement.innerHTML += Note(note));
 }
 
 
 targetElement.addEventListener('click', event => {
   if (event.target.id.startsWith('deleteBtn--')) {
     const [prefix, buttonIdNumber] = event.target.id.split('--') 
-      console.log(buttonIdNumber)
       deleteNote(buttonIdNumber)
 
   }  
