@@ -1,9 +1,22 @@
 import { saveNote, getNotes } from './notesDataProvider.js'
 
 const contentTarget = document.querySelector('.noteFormContainer')
+const eventHub = document.querySelector('.container')
 
+let invisibility = true
+eventHub.addEventListener('toggleButtonWasClicked', event => {
+  
+  invisibility = !invisibility
+
+  if (invisibility) {
+    contentTarget.classList.add('invisible')
+  } else {
+    contentTarget.classList.remove('invisible')
+  }
+})
 
 const render = () => {
+  contentTarget.classList.add('invisible')
   contentTarget.innerHTML = `
     <form class="noteForm">
       <label for="suspect">Suspect: </label>

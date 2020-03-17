@@ -1,0 +1,9 @@
+.invisible {
+  display: none;
+}
+
+.notesContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 20px;
+}
