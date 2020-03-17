@@ -2,6 +2,11 @@ import { Note } from "./Note.js";
 import { useNotes, deleteNote } from "./notesDataProvider.js";
 
 const targetElement = document.querySelector('.noteListContainer')
+const eventHub = document.querySelector('#container')
+
+eventHub.addEventListener('noteStateChanged', event => {
+  render()
+})
 
 export const NotesList = () => {
   const notes = useNotes()
