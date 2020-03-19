@@ -6,6 +6,7 @@ const eventHub = document.querySelector('.container')
 
 
 eventHub.addEventListener('officerSelected', event => {
+  contentElement.classList.remove('invisible')
   const criminalData = useCriminals()
 
   if (event.detail.officer === 'allOfficers') {
@@ -26,6 +27,7 @@ eventHub.addEventListener('officerSelected', event => {
 
 eventHub.addEventListener('crimeSelected', event => {
   const criminalData = useCriminals()
+  contentElement.classList.remove('invisible')
 
   if (event.detail.crime === 'allCrimes') {
     contentElement.innerHTML = ''
@@ -66,4 +68,11 @@ contentElement.addEventListener('click', event => {
     eventHub.dispatchEvent(showAssociateDialog)
 
   }
+})
+
+let witnessVisiblility = false
+
+eventHub.addEventListener('showWitnessStatementsWasClicked', () => {
+  witnessVisiblility = !witnessVisiblility  
+  witnessVisiblility ? contentElement.classList.add('invisible') : contentElement.classList.remove('invisible')
 })

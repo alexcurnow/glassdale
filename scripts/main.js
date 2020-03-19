@@ -10,6 +10,9 @@ import { NoteFormToggleButton } from './notes/ToggleNoteFormButton.js'
 import { ToggleNotesListButton } from './notes/ToggleNotesListButton.js'
 import { NotesList } from './notes/NotesList.js'
 import './criminals/AssociatesDialog.js'
+import { getWitnesses } from './witnesses/witnessProvider.js'
+import { WitnessStatementsList } from './witnesses/WitnessStatementsList.js'
+import { WitnessStatementsButton } from './witnesses/WitnessStatementsButton.js'
 
 NoteForm()
 NoteFormToggleButton()
@@ -18,3 +21,5 @@ getNotes().then(NotesList)
 getCriminals().then(RenderCriminalsList)
 getConvictions().then(ConvictionSelect)
 getOfficers().then(OfficerSelect)
+getWitnesses().then(WitnessStatementsList)
+WitnessStatementsButton()
