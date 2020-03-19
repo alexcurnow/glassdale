@@ -9,8 +9,7 @@ import { getNotes } from './notes/notesDataProvider.js'
 import { NoteFormToggleButton } from './notes/ToggleNoteFormButton.js'
 import { ToggleNotesListButton } from './notes/ToggleNotesListButton.js'
 import { NotesList } from './notes/NotesList.js'
-
-console.log('Welcome to the main module')
+import './criminals/AssociatesDialog.js'
 
 NoteForm()
 NoteFormToggleButton()

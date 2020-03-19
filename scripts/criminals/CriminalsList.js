@@ -51,3 +51,19 @@ const render = criminalCollection => {
     criminal => (contentElement.innerHTML += Criminal(criminal))
   )
 }
+
+contentElement.addEventListener('click', event => {
+  if (event.target.id.startsWith('showAssociates--')) {
+    
+    const [prefix, criminalId] = event.target.id.split("--")
+  
+    const showAssociateDialog = new CustomEvent('showAssociatesClicked', {
+      detail: {
+        selectedCriminal: criminalId
+      }
+    })
+    
+    eventHub.dispatchEvent(showAssociateDialog)
+
+  }
+})
