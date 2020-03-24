@@ -14,11 +14,13 @@ import { getWitnesses } from './witnesses/witnessProvider.js'
 import { WitnessStatementsList } from './witnesses/WitnessStatementsList.js'
 import { WitnessStatementsButton } from './witnesses/WitnessStatementsButton.js'
 
-NoteForm()
 NoteFormToggleButton()
 ToggleNotesListButton()
-getNotes().then(NotesList)
-getCriminals().then(RenderCriminalsList)
+getCriminals()
+.then(getNotes)
+.then(RenderCriminalsList)
+.then(NoteForm)
+.then(NotesList)
 getConvictions().then(ConvictionSelect)
 getOfficers().then(OfficerSelect)
 getWitnesses().then(WitnessStatementsList)

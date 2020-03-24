@@ -1,5 +1,6 @@
-import { Note } from "./Note.js";
-import { useNotes, deleteNote } from "./notesDataProvider.js";
+import { Note } from './Note.js'
+import { useNotes, deleteNote } from './notesDataProvider.js'
+import { useCriminals } from '../criminals/criminalsDataProvider.js'
 
 const targetElement = document.querySelector('.noteListContainer')
 const eventHub = document.querySelector('.container')
@@ -8,10 +9,9 @@ let invisibility = true
 
 eventHub.addEventListener('noteStateChanged', () => {
   const notes = useNotes()
-  targetElement.innerHTML = ""
+  targetElement.innerHTML = ''
   render(notes)
 })
-
 
 eventHub.addEventListener('toggleNotesListButtonWasClicked', () => {
   invisibility = !invisibility
@@ -24,20 +24,50 @@ eventHub.addEventListener('toggleNotesListButtonWasClicked', () => {
 })
 
 export const NotesList = () => {
+  render()
+}
+
+const render = () => {
   const notes = useNotes()
-  render(notes)
+  const criminals = useCriminals()
+
+  notes.map(note => {
+    const foundCriminal = criminals.find(
+      criminal => criminal.id === note.suspect
+    )
+    targetElement.innerHTML += Note(note, foundCriminal)
+  })
+}
+
+eventHub.addEventListener('suspectSelected', event => {
+  if ('suspect' in event.detail) {
+    let notes = useNotes()
+    const criminals = useCriminals()
+
+    const associatedNote = notes.find(
+      note => note.suspect === event.detail.suspect
+    )
+
+    if (associatedNote) {
+
+      notes.map(note => {
+        const foundCriminal = criminals.find(
+          criminal => criminal.id === event.detail.suspect
+        )
   
-}
+        targetElement.innerHTML = Note(associatedNote, foundCriminal)
+      })
 
-const render = notesCollection => {
-  notesCollection.map(note => targetElement.innerHTML += Note(note));
-}
 
+    } else {
+      alert('no available notes for this suspect')
+    }
+  }
+})
 
 targetElement.addEventListener('click', event => {
   if (event.target.id.startsWith('deleteBtn--')) {
-    const [prefix, buttonIdNumber] = event.target.id.split('--') 
-      deleteNote(buttonIdNumber)
-
-  }  
-  })
+    const [prefix, buttonIdNumber] = event.target.id.split('--')
+    deleteNote(buttonIdNumber)
+  }
+})
